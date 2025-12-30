@@ -12,6 +12,8 @@ function Layout({ children }: { children: React.ReactNode }) {
   const navigate = useNavigate()
   const location = useLocation()
   const hideMainNav = location.pathname === '/login' || location.pathname === '/register'
+  const isLogin = location.pathname === '/login'
+  const isRegister = location.pathname === '/register'
   return (
     <div className="min-h-screen bg-gradient-to-br from-fuchsia-100 via-pink-100 to-green-100 dark:from-gray-900 dark:via-fuchsia-950 dark:to-emerald-950 animated-gradient">
       <header className="sticky top-0 z-20 backdrop-blur bg-gradient-to-r from-fuchsia-600/70 to-green-600/70 dark:from-fuchsia-900/60 dark:to-green-900/60 border-b border-transparent">
@@ -24,13 +26,27 @@ function Layout({ children }: { children: React.ReactNode }) {
                 <NavLink to="/vehicles" className={({isActive})=>`px-3 py-1 rounded-md transition-all duration-200 hover:shadow-md active:scale-95 ${isActive?'bg-green-600 text-white':'bg-white/70 dark:bg-gray-800/70'}`}>Veicoli</NavLink>
               </>
             )}
-            {token ? (
-              <button className="px-3 py-1 rounded-md bg-gray-900 text-white dark:bg-gray-200 dark:text-gray-900 transition-all duration-200 hover:shadow-md active:scale-95" onClick={()=>{logout(); navigate('/login')}}>Esci</button>
-            ) : (
+            {isLogin && (
               <div className="flex gap-2">
-                <Link to="/login" className="px-3 py-1 rounded-md bg-fuchsia-600 text-white transition-all duration-200 hover:shadow-md active:scale-95">Accedi</Link>
+                <Link to="/" className="px-3 py-1 rounded-md bg-white/70 dark:bg-gray-800/70 transition-all duration-200 hover:shadow-md active:scale-95">Home</Link>
                 <Link to="/register" className="px-3 py-1 rounded-md bg-green-600 text-white transition-all duration-200 hover:shadow-md active:scale-95">Registrati</Link>
               </div>
+            )}
+            {isRegister && (
+              <div className="flex gap-2">
+                <Link to="/" className="px-3 py-1 rounded-md bg-white/70 dark:bg-gray-800/70 transition-all duration-200 hover:shadow-md active:scale-95">Home</Link>
+                <Link to="/login" className="px-3 py-1 rounded-md bg-fuchsia-600 text-white transition-all duration-200 hover:shadow-md active:scale-95">Accedi</Link>
+              </div>
+            )}
+            {!isLogin && !isRegister && (
+              token ? (
+                <button className="px-3 py-1 rounded-md bg-gray-900 text-white dark:bg-gray-200 dark:text-gray-900 transition-all duration-200 hover:shadow-md active:scale-95" onClick={()=>{logout(); navigate('/login')}}>Esci</button>
+              ) : (
+                <div className="flex gap-2">
+                  <Link to="/login" className="px-3 py-1 rounded-md bg-fuchsia-600 text-white transition-all duration-200 hover:shadow-md active:scale-95">Accedi</Link>
+                  <Link to="/register" className="px-3 py-1 rounded-md bg-green-600 text-white transition-all duration-200 hover:shadow-md active:scale-95">Registrati</Link>
+                </div>
+              )
             )}
           </nav>
         </div>
@@ -376,22 +392,34 @@ function VehicleDetailPage() {
       )}
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {/* Sezione solo form Spese */}
         <section className="p-3 bg-white dark:bg-gray-800 rounded shadow">
-          <h3 className="font-semibold mb-2">Spese</h3>
+          <h3 className="font-semibold mb-2">Aggiungi spesa</h3>
           <ExpenseForm onSubmit={addExpense} />
-          <ExpenseList expenses={expenses} onDelete={removeExpense} />
         </section>
 
+        {/* Sezione solo form Promemoria */}
         <section className="p-3 bg-white dark:bg-gray-800 rounded shadow">
-          <h3 className="font-semibold mb-2">Promemoria</h3>
+          <h3 className="font-semibold mb-2">Aggiungi promemoria</h3>
           <form onSubmit={addReminder} className="grid grid-cols-2 gap-2 mb-3">
             <select name="type" className="border rounded px-2 py-1">
               {['insurance','tax','revision','maintenance'].map(c=> <option key={c} value={c}>{fmtReminder(c)}</option>)}
             </select>
             <input name="due_date" type="date" className="border rounded px-2 py-1" required />
-            <input name="note" placeholder="note" className="border rounded px-2 py-1 col-span-2" />
+            <input name="note" placeholder="Note" className="border rounded px-2 py-1 col-span-2" />
             <button className="px-3 py-1 bg-blue-600 text-white rounded col-span-2">Aggiungi</button>
           </form>
+        </section>
+
+        {/* Sezione dedicata elenco Spese */}
+        <section className="p-3 bg-white dark:bg-gray-800 rounded shadow md:col-span-2">
+          <h3 className="font-semibold mb-2">Spese</h3>
+          <ExpenseList expenses={expenses} onDelete={removeExpense} />
+        </section>
+
+        {/* Sezione dedicata elenco Promemoria */}
+        <section className="p-3 bg-white dark:bg-gray-800 rounded shadow md:col-span-2">
+          <h3 className="font-semibold mb-2">Promemoria</h3>
           <ul className="space-y-2">
             {reminders.map(r=> (
               <li key={r.id} className="flex justify-between">
