@@ -17,7 +17,7 @@ export default function ThemeToggle() {
     <button
       aria-label="Cambia tema"
       onClick={() => setDark(v => !v)}
-      className="px-3 py-1 rounded border border-gray-300 dark:border-gray-600 bg-white/60 dark:bg-gray-800/60 hover:bg-white dark:hover:bg-gray-700"
+      className="px-3 py-1 rounded-md border border-gray-300 dark:border-gray-600 bg-white/70 dark:bg-gray-800/70 backdrop-blur transition-all duration-200 hover:shadow-md active:scale-95"
     >
       {dark ? 'Tema chiaro' : 'Tema scuro'}
     </button>

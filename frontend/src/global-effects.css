@@ -1,0 +1,32 @@
+/* Gradienti e micro-interazioni globali */
+.hover-elevate { transition: transform .2s ease, box-shadow .2s ease; }
+.hover-elevate:hover { transform: translateY(-2px); box-shadow: 0 10px 18px rgba(0,0,0,.12); }
+
+.btn-fx { transition: transform .15s ease, box-shadow .15s ease, background .3s ease; }
+.btn-fx:hover { transform: translateY(-1px); box-shadow: 0 8px 14px rgba(0,0,0,.12); }
+.btn-fx:active { transform: scale(.97); }
+
+.card-fx { transition: transform .2s ease, box-shadow .2s ease, background .4s ease; }
+.card-fx:hover { transform: translateY(-2px); box-shadow: 0 12px 20px rgba(0,0,0,.14); }
+
+.gradient-green-fuchsia { background-image: linear-gradient(135deg, #22c55e, #d946ef); }
+.text-gradient { background-image: linear-gradient(90deg, #22c55e, #d946ef); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+.reveal { opacity: 0; transform: translateY(6px); transition: opacity .3s ease, transform .3s ease; }
+.reveal.show { opacity: 1; transform: translateY(0); }
+
+.tooltip { position: relative; }
+.tooltip .tooltip-content { position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background: rgba(20,20,20,.9); color: #fff; padding: .4rem .6rem; border-radius: .4rem; font-size: .75rem; opacity: 0; pointer-events: none; transition: opacity .2s ease, transform .2s ease; white-space: nowrap; }
+.tooltip:hover .tooltip-content { opacity: 1; transform: translate(-50%, 4px); }
+
+.skeleton { background: linear-gradient(90deg, rgba(255,255,255,.2), rgba(255,255,255,.4), rgba(255,255,255,.2)); background-size: 200% 100%; animation: skeleton-shimmer 1.2s ease-in-out infinite; }
+@keyframes skeleton-shimmer { 0% { background-position: -100% 0; } 100% { background-position: 100% 0; } }
+
+.modal-overlay { position: fixed; inset: 0; backdrop-filter: blur(6px); background: rgba(15,15,15,.35); }
+
+/* Blobs decorativi animati */
+.blobs { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+.blob { position: absolute; width: 220px; height: 220px; border-radius: 50%; filter: blur(20px); opacity: .25; animation: float 10s ease-in-out infinite; }
+.blob.green { background: radial-gradient(circle at 30% 30%, #22c55e, transparent 60%); }
+.blob.fuchsia { background: radial-gradient(circle at 70% 70%, #d946ef, transparent 60%); }
+@keyframes float { 0% { transform: translate(0,0); } 50% { transform: translate(20px,-10px); } 100% { transform: translate(0,0); } }

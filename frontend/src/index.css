@@ -4,4 +4,18 @@
 html, body, #root {
   height: 100%;
 }
-/* Colori base gestiti via classi Tailwind nei componenti */
+/* Animazione gradiente leggero */
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animated-gradient {
+  background-size: 200% 200%;
+  animation: gradient-shift 12s ease infinite;
+}
+
+/* Effetto reveal semplice */
+.reveal { opacity: 0; transform: translateY(6px); transition: opacity .4s ease, transform .4s ease; }
+.reveal.show { opacity: 1; transform: translateY(0); }
