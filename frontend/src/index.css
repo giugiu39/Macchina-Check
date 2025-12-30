@@ -1,0 +1,7 @@
+@import "tailwindcss";
+
+/* Base layout */
+html, body, #root {
+  height: 100%;
+}
+/* Colori base gestiti via classi Tailwind nei componenti */
