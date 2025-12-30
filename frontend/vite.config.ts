@@ -10,4 +10,22 @@ export default defineConfig({
       },
     }),
   ],
+  server: {
+    host: true, // permette accesso da altri dispositivi sulla LAN
+    port: 1974,
+    strictPort: true,
+    allowedHosts: ['mahalia-undazzled-unsqueamishly.ngrok-free.dev'],
+    hmr: {
+      host: 'mahalia-undazzled-unsqueamishly.ngrok-free.dev',
+      protocol: 'wss',
+      clientPort: 443,
+    },
+    proxy: {
+      '/api': {
+        target: 'http://localhost:4000',
+        changeOrigin: true,
+        secure: false,
+      },
+    },
+  },
 })

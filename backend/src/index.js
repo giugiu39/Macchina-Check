@@ -42,6 +42,6 @@ app.use((err, req, res, next) => {
   res.status(status).json({ error: err.message || 'Errore interno' });
 });
 
-app.listen(PORT, () => {
-  console.log(`API server in ascolto su http://localhost:${PORT}`);
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`API server in ascolto su 0.0.0.0:${PORT} (LAN access abilitato)`);
 });

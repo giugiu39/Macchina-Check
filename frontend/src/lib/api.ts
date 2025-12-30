@@ -1,4 +1,6 @@
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:4000/api';
+// Usa percorso relativo per evitare contenuti misti (HTTPS → HTTP) e CORS.
+// Con Vite proxy, `/api` viene inoltrato al backend locale (porta 4000).
+const API_URL = import.meta.env.VITE_API_URL || '/api';
 
 export function getToken() {
   return localStorage.getItem('token');

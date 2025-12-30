@@ -114,7 +114,9 @@ function RegisterPage() {
             <input type={key.includes('password')?'password':(key==='email'?'email':'text')} value={(form as any)[key]} onChange={e=>setForm({...form, [key]: e.target.value})} className="w-full border rounded px-3 py-2" required />
           </div>
         ))}
-        <button className="mt-2 px-4 py-2 bg-green-600 text-white rounded md:col-span-2">Crea account</button>
+        <div className="mt-2 md:col-span-2 flex items-center justify-between">
+          <button className="px-4 py-2 bg-green-600 text-white rounded">Crea account</button>
+        </div>
       </form>
     </Layout>
   )
@@ -143,7 +145,9 @@ function LoginPage() {
           <label className="block text-sm mb-1">Password</label>
           <input type="password" value={password} onChange={e=>setPassword(e.target.value)} className="w-full border rounded px-3 py-2" required />
         </div>
-        <button className="px-4 py-2 bg-blue-600 text-white rounded">Accedi</button>
+        <div className="flex items-center justify-between">
+          <button className="px-4 py-2 bg-blue-600 text-white rounded">Accedi</button>
+        </div>
       </form>
     </Layout>
   )
